@@ -38,9 +38,7 @@ public class CleanStrikeGame {
 		this.carromBoard = carromBoard;
 	}
 
-	public void performStrike(iStrike strike) {
-		currentStrike.doStrike(carromBoard, currentPlayer);
+	public void performStrike() {
+		this.currentStrike.doStrike(carromBoard, currentPlayer);
 	}
-	
-	
 }

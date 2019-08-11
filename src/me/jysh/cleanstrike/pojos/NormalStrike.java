@@ -1,7 +1,8 @@
 package me.jysh.cleanstrike.pojos;
 
-public class NormalStrike implements iStrike {
+import java.util.function.Supplier;
 
+public class NormalStrike implements iStrike {
 	@Override
 	public boolean isPossible(CarromBoard carromBoard, Player currentPlayer) {
 		return carromBoard.hasBlackCoins();
