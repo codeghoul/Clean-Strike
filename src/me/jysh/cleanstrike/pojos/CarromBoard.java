@@ -3,6 +3,11 @@ package me.jysh.cleanstrike.pojos;
 public class CarromBoard {
 	private int blackCoinCount;
 	private int redCoinCount;
+	
+	{
+		blackCoinCount = 9;
+		redCoinCount = 1;
+	}
 
 	public int getBlackCoinCount() {
 		return blackCoinCount;
@@ -34,5 +39,13 @@ public class CarromBoard {
 	
 	public void decrementRedCoinCount(int redCoinCount) {
 		this.redCoinCount -= redCoinCount;
+	}
+	
+	public boolean hasBlackCoins() {
+		return this.blackCoinCount > 0;
+	}
+	
+	public boolean hasRedCoins() {
+		return this.redCoinCount > 0;
 	}
 }

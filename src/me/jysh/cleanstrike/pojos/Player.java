@@ -5,6 +5,19 @@ public class Player {
 	private int pointCount;
 	private int foulCount;
 	private int successiveNonPocketCount;
+	
+	{
+		pointCount = 0;
+		foulCount = 0;
+		successiveNonPocketCount = 0;
+	}
+	
+	public Player() {
+	}
+	
+	public Player(String playerName) {
+		this.playerName = playerName;
+	}
 
 	public String getPlayerName() {
 		return playerName;
