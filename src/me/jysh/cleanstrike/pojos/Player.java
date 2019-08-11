@@ -5,6 +5,7 @@ public class Player {
 	private int pointCount;
 	private int foulCount;
 	private int successiveNonPocketCount;
+	private boolean recentNonPocket;
 	
 	{
 		pointCount = 0;
@@ -49,6 +50,14 @@ public class Player {
 
 	public void setSuccessiveNonPocketCount(int successiveNonPocketCount) {
 		this.successiveNonPocketCount = successiveNonPocketCount;
+	}
+
+	public boolean hasRecentNonPocket() {
+		return recentNonPocket;
+	}
+
+	public void setRecentNonPocket(boolean recentNonPocket) {
+		this.recentNonPocket = recentNonPocket;
 	}
 
 	public void incrementPointCount(int pointCount) {

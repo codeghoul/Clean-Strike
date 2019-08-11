@@ -1,26 +1,33 @@
 package me.jysh.cleanstrike.pojos;
 
-import com.sun.xml.internal.bind.v2.TODO;
-
-public class CleanStrike {
+public class CleanStrikeGame {
 	private Player currentPlayer;
+	private iStrike currentStrike;
 	private CarromBoard carromBoard;
 
 	{
 		carromBoard = new CarromBoard();
 	}
-	
-	public CleanStrike(Player currentPlayer) {
+
+	public CleanStrikeGame(Player currentPlayer) {
 		super();
 		this.currentPlayer = currentPlayer;
 	}
-	
+
 	public Player getCurrentPlayer() {
 		return this.currentPlayer;
 	}
-	
+
 	public void setCurrentPlayer(Player player) {
 		this.currentPlayer = player;
+	}
+
+	public iStrike getCurrentStrike() {
+		return currentStrike;
+	}
+
+	public void setCurrentStrike(iStrike currentStrike) {
+		this.currentStrike = currentStrike;
 	}
 
 	public CarromBoard getCarromBoard() {
@@ -30,32 +37,10 @@ public class CleanStrike {
 	public void setCarromBoard(CarromBoard carromBoard) {
 		this.carromBoard = carromBoard;
 	}
+
+	public void performStrike(iStrike strike) {
+		currentStrike.doStrike(carromBoard, currentPlayer);
+	}
 	
-//	public void redStrike() {
-//		
-//	}
-//	
-//	public void noStrike() {
-//		
-//	}
-//	
-//	private int inputMultiStrikeCount() {
-//		return 0;	
-//	}
-//	
-//	public void multiStrike() {
-//		int n = inputMultiStrikeCount();
-//	}
-//	
-//	public void strikerStrike() {
-//		
-//	}
-//	
-//	private int inputDefunctCoin() {
-//		return 0;
-//	}
-//	
-//	public void defunctCoinStrike() {
-//		
-//	}
+	
 }
