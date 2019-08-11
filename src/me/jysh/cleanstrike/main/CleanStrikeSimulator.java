@@ -28,7 +28,7 @@ public class CleanStrikeSimulator {
 		if (hasWinner()) {
 			Player winner = (playerOne.getPointCount() > playerTwo.getPointCount()) ? playerOne : playerTwo;
 			LOGGER.info("Player " + winner.getPlayerName() + " won the game by: "
-					+ Math.abs(playerOne.getPointCount() - playerTwo.getPointCount()));
+					+ Math.abs(playerOne.getPointCount() - playerTwo.getPointCount()) + " Points");
 		} else {
 			LOGGER.info("It's a draw.");
 		}
@@ -36,6 +36,7 @@ public class CleanStrikeSimulator {
 
 	private void playCleanStrike() {
 		while (isPlayable()) {
+			displayPlayerName();
 			iStrike currentStrike = IOUtils.inputStrikeInformation(cleanStrike.getCarromBoard());
 			cleanStrike.setCurrentStrike(currentStrike);
 			cleanStrike.performStrike();
@@ -45,19 +46,23 @@ public class CleanStrikeSimulator {
 		}
 	}
 
+	private void displayPlayerName() {
+		System.out.print(cleanStrike.getCurrentPlayer().getPlayerName() + " ");
+	}
+
 	private void switchCurrentPlayer() {
-		LOGGER.info("Player Before Switching: " + cleanStrike.getCurrentPlayer());
-		cleanStrike.setCurrentPlayer(cleanStrike.getCurrentPlayer().equals(playerOne) ? playerTwo : playerOne);
-		LOGGER.info("Player After Switching: " + cleanStrike.getCurrentPlayer());
+		LOGGER.trace("Player Before Switching: " + cleanStrike.getCurrentPlayer().getPlayerName());
+		cleanStrike.setCurrentPlayer(cleanStrike.getCurrentPlayer() == playerOne ? playerTwo : playerOne);
+		LOGGER.trace("Player After Switching: " + cleanStrike.getCurrentPlayer().getPlayerName());
 	}
 
 	private void displayGameStatus() {
 		LOGGER.info(playerOne.getPlayerName() + " Points: " + playerOne.getPointCount() + "\n"
-				+ playerTwo.getPlayerName() + "Points: " + playerOne.getPointCount());
+				+ playerTwo.getPlayerName() + "Points: " + playerTwo.getPointCount());
 	}
 
 	private boolean isPlayable() {
-		return !hasWinner() || this.cleanStrike.getCarromBoard().isPlayable();
+		return !hasWinner() && this.cleanStrike.getCarromBoard().isPlayable();
 	}
 
 	private boolean hasWinner() {

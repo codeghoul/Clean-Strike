@@ -39,6 +39,7 @@ public class CleanStrikeGame {
 	}
 
 	public void performStrike() {
+		System.out.println(currentPlayer.getPlayerName());
 		this.currentStrike.doStrike(carromBoard, currentPlayer);
 	}
 
