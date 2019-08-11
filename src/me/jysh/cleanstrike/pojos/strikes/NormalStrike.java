@@ -1,7 +1,5 @@
 package me.jysh.cleanstrike.pojos.strikes;
 
-import java.util.function.Supplier;
-
 import me.jysh.cleanstrike.pojos.CarromBoard;
 import me.jysh.cleanstrike.pojos.Player;
 

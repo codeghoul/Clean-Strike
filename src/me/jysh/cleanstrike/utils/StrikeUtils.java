@@ -1,10 +1,10 @@
 package me.jysh.cleanstrike.utils;
 
-import me.jysh.cleanstrike.pojos.DefunctCoinStrike;
 import me.jysh.cleanstrike.pojos.strikes.MultiStrike;
 import me.jysh.cleanstrike.pojos.strikes.NoStrike;
 import me.jysh.cleanstrike.pojos.strikes.NormalStrike;
 import me.jysh.cleanstrike.pojos.strikes.RedStrike;
+import me.jysh.cleanstrike.pojos.strikes.DefunctCoinStrike;
 import me.jysh.cleanstrike.pojos.strikes.EnumStrike;
 import me.jysh.cleanstrike.pojos.strikes.StrikerStrike;
 import me.jysh.cleanstrike.pojos.strikes.iStrike;

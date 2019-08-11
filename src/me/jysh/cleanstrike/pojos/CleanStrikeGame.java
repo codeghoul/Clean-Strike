@@ -11,9 +11,7 @@ public class CleanStrikeGame {
 		carromBoard = new CarromBoard();
 	}
 
-	public CleanStrikeGame(Player currentPlayer) {
-		super();
-		this.currentPlayer = currentPlayer;
+	public CleanStrikeGame() {
 	}
 
 	public Player getCurrentPlayer() {
@@ -42,5 +40,18 @@ public class CleanStrikeGame {
 
 	public void performStrike() {
 		this.currentStrike.doStrike(carromBoard, currentPlayer);
+	}
+
+	public void performFoulOperations() {
+		if(this.currentPlayer.getFoulCount() == 3) {
+			this.currentPlayer.decrementPointCount(1);
+			this.currentPlayer.setFoulCount(1);
+		}
+		
+		if(this.currentPlayer.getSuccessiveNonPocketCount() == 3) {
+			this.currentPlayer.decrementPointCount(1);
+			this.currentPlayer.setSuccessiveNonPocketCount(0);
+			this.currentPlayer.setRecentNonPocket(false);
+		}
 	}
 }

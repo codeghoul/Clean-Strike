@@ -21,6 +21,17 @@ public class CleanStrikeSimulator {
 	private void run() {
 		initCleanStrike();
 		playCleanStrike();
+		displayResultsOfCleanStrike();
+	}
+
+	private void displayResultsOfCleanStrike() {
+		if (hasWinner()) {
+			Player winner = (playerOne.getPointCount() > playerTwo.getPointCount()) ? playerOne : playerTwo;
+			LOGGER.info("Player " + winner.getPlayerName() + " won the game by: "
+					+ Math.abs(playerOne.getPointCount() - playerTwo.getPointCount()));
+		} else {
+			LOGGER.info("It's a draw.");
+		}
 	}
 
 	private void playCleanStrike() {
@@ -28,7 +39,21 @@ public class CleanStrikeSimulator {
 			iStrike currentStrike = IOUtils.inputStrikeInformation(cleanStrike.getCarromBoard());
 			cleanStrike.setCurrentStrike(currentStrike);
 			cleanStrike.performStrike();
+			cleanStrike.performFoulOperations();
+			displayGameStatus();
+			switchCurrentPlayer();
 		}
+	}
+
+	private void switchCurrentPlayer() {
+		LOGGER.info("Player Before Switching: " + cleanStrike.getCurrentPlayer());
+		cleanStrike.setCurrentPlayer(cleanStrike.getCurrentPlayer().equals(playerOne) ? playerTwo : playerOne);
+		LOGGER.info("Player After Switching: " + cleanStrike.getCurrentPlayer());
+	}
+
+	private void displayGameStatus() {
+		LOGGER.info(playerOne.getPlayerName() + " Points: " + playerOne.getPointCount() + "\n"
+				+ playerTwo.getPlayerName() + "Points: " + playerOne.getPointCount());
 	}
 
 	private boolean isPlayable() {
@@ -51,7 +76,8 @@ public class CleanStrikeSimulator {
 	private void initCurrentPlayer() {
 		LOGGER.trace("Entering initCurrentPlayer()");
 		Player currentPlayer = IOUtils.inputCurrentPlayer(playerOne, playerTwo);
-		this.cleanStrike = new CleanStrikeGame(currentPlayer);
+		this.cleanStrike = new CleanStrikeGame();
+		cleanStrike.setCurrentPlayer(currentPlayer);
 		LOGGER.info(this.cleanStrike.getCurrentPlayer().getPlayerName() + " goes first!");
 		LOGGER.trace("Exiting initCurrentPlayer()");
 	}
