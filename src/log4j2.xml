@@ -6,14 +6,15 @@
     <Appenders>
         <!-- Console Appender -->
         <Console name="STDOUT" target="SYSTEM_OUT">
-            <PatternLayout pattern="%-5p | %d{yyyy-MM-dd HH:mm:ss} | [%t] %C{2} (%F:%L) - %m%n" />
+            <PatternLayout pattern="%-5p %m%n" />
         </Console>
     </Appenders>
     <Loggers>
         <Logger name="me.jysh" level="debug" />
-        <Root level="info">
+        <Root level="debug">
             <AppenderRef ref="STDOUT" />
-<!--             <AppenderRef ref="FILE" /> -->
         </Root>
     </Loggers>
 </Configuration>
+
+<!--  [%t] %C{2} (%F:%L) -->

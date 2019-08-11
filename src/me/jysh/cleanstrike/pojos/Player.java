@@ -6,16 +6,16 @@ public class Player {
 	private int foulCount;
 	private int successiveNonPocketCount;
 	private boolean recentNonPocket;
-	
+
 	{
 		pointCount = 0;
 		foulCount = 0;
 		successiveNonPocketCount = 0;
 	}
-	
+
 	public Player() {
 	}
-	
+
 	public Player(String playerName) {
 		this.playerName = playerName;
 	}
@@ -82,5 +82,12 @@ public class Player {
 
 	public void decrementSuccessiveNonPocketCount(int successiveNonPocketCount) {
 		this.successiveNonPocketCount += successiveNonPocketCount;
+	}
+
+	@Override
+	public String toString() {
+		return "Player [Name= " + playerName + ", Points= " + pointCount + ", Fouls= " + foulCount
+				+ ", Successive Non Pockets= " + successiveNonPocketCount + ", Recent Non Pocket= " + recentNonPocket
+				+ " ]";
 	}
 }

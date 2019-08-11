@@ -1,0 +1,32 @@
+package me.jysh.cleanstrike.constants;
+
+public enum ScoreConstants {
+	NORMALSTRIKEPOINTCOUNT(1),
+	MULTISTRIKEPOINTCOUNT(2),
+	REDSTRIKEPOINTCOUNT(3),
+	STRIKERSTRIKEPOINTCOUNT(1),
+	DEFUNCTBLACKCOINSTRIKEPOINTCOUNT(2),
+	DEFUNCTREDCOINSTRIKEPOINTCOUNT(2),
+	NOSTRIKEPOINTCOUNT(0),
+	
+	STRIKERSTRIKEFOULCOUNT(1),
+	DEFUNCTBLACKCOINFOULCOUNT(2),
+	DEFUNCTREDCOINFOULCOUNT(2),
+	NOSTRIKEFOULCOUNT(0),
+	SUCCESSIVENOSTRIKEFOULCOUNT(1),
+	CONTINUOUSTHREEFOULCOUNT(3);
+	
+	private int count;
+	
+	public int getCount() {
+		return count;
+	}
+
+	public void setCount(int count) {
+		this.count = count;
+	}
+
+	ScoreConstants(int count) {
+		this.count = count;
+	}
+}

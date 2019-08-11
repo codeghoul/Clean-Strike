@@ -11,7 +11,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import me.jysh.cleanstrike.pojos.Player;
-import me.jysh.cleanstrike.pojos.strikes.EnumStrike;
+import me.jysh.cleanstrike.pojos.strikes.StrikeInformation;
 import me.jysh.cleanstrike.pojos.strikes.iStrike;
 import me.jysh.cleanstrike.pojos.CarromBoard;
 
@@ -28,7 +28,8 @@ public class IOUtils {
 			}
 			LOGGER.info("Player name set to: " + playerName);
 		} catch (IOException | IllegalArgumentException e) {
-			LOGGER.error("Problem occured when entering player name. Details: " + e.getMessage());
+			LOGGER.error(
+					"Problem occured while entering player name. Details: " + e.getMessage() + " Please try again.");
 			playerName = inputPlayerName();
 		}
 		return playerName;
@@ -39,40 +40,45 @@ public class IOUtils {
 		System.out.println("1. " + playerOne.getPlayerName());
 		System.out.println("2. " + playerTwo.getPlayerName());
 		String choice = null;
+		Player currentPlayer = null;
 		try {
 			choice = CONSOLEREADER.readLine();
 			if (!(choice.equals("1") || choice.equals("2"))) {
 				throw new IllegalArgumentException("Invalid Choice");
 			}
+			currentPlayer = choice.equals("1") ? playerOne : playerTwo;
+			LOGGER.info("Current Player: " + currentPlayer.getPlayerName());
 		} catch (IOException | IllegalArgumentException e) {
-			LOGGER.error("A problem occured when choosing who goes first. Details: " + e.getMessage());
-			return inputCurrentPlayer(playerOne, playerTwo);
+			LOGGER.error("A problem occured while choosing who goes first. Details: " + e.getMessage()
+					+ " Please try again.");
+			currentPlayer = inputCurrentPlayer(playerOne, playerTwo);
 		}
-		return choice.equals("1") ? playerOne : playerTwo;
+		return currentPlayer;
 	}
 
 	public static iStrike inputStrikeInformation(CarromBoard carromBoard) {
-		Map<EnumStrike, Supplier<iStrike>> strikeSupplier = StrikeUtils.getStrikesupplier().entrySet().stream()
-				.filter(entry -> entry.getValue().get().isPossible(carromBoard))
+		Map<StrikeInformation, Supplier<iStrike>> strikeSupplier = StrikeUtils.getStrikeSupplier().entrySet().stream()
+				.filter(entry -> entry.getValue().get().isStrikePossible(carromBoard))
 				.collect(Collectors.toMap(e -> e.getKey(), e -> e.getValue()));
 
 		System.out.println("Choose type of strike: ");
+
 		strikeSupplier.keySet().stream().sorted()
-				.map(key -> key.getStrikeChoice() + ". for " + key.getStrikeDescription()).forEach(System.out::println);
+				.map(key -> key.getStrikeChoice() + ". to " + key.getStrikeDescription()).forEach(System.out::println);
 
 		iStrike strike = null;
 
 		String choice = null;
 		try {
 			choice = CONSOLEREADER.readLine();
-			EnumStrike enumStrike = EnumStrike.getStrikelookup(choice);
+			StrikeInformation strikeInformation = StrikeInformation.getStrikelookup(choice);
 
-			if (enumStrike == null || !strikeSupplier.containsKey(enumStrike)) {
+			if (strikeInformation == null || !strikeSupplier.containsKey(strikeInformation)) {
 				throw new IllegalArgumentException("Invalid Choice");
 			}
 
-			strike = strikeSupplier.get(enumStrike).get();
-
+			strike = strikeSupplier.get(strikeInformation).get();
+			LOGGER.info("Current Strike Purpose: " + strikeInformation.getStrikeDescription());
 		} catch (IOException | IllegalArgumentException e) {
 			LOGGER.error("A problem occured when choosing who goes first. Details: " + e.getMessage());
 			strike = inputStrikeInformation(carromBoard);

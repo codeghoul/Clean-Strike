@@ -1,5 +1,6 @@
 package me.jysh.cleanstrike.pojos;
 
+import me.jysh.cleanstrike.constants.ScoreConstants;
 import me.jysh.cleanstrike.pojos.strikes.iStrike;
 
 public class CleanStrikeGame {
@@ -45,14 +46,17 @@ public class CleanStrikeGame {
 
 	public void performFoulOperations() {
 		if(this.currentPlayer.getFoulCount() == 3) {
-			this.currentPlayer.decrementPointCount(1);
+			this.currentPlayer.decrementPointCount(ScoreConstants.CONTINUOUSTHREEFOULCOUNT.getCount());
 			this.currentPlayer.setFoulCount(1);
 		}
 		
 		if(this.currentPlayer.getSuccessiveNonPocketCount() == 3) {
-			this.currentPlayer.decrementPointCount(1);
+			this.currentPlayer.decrementPointCount(ScoreConstants.SUCCESSIVENOSTRIKEFOULCOUNT.getCount());
 			this.currentPlayer.setSuccessiveNonPocketCount(0);
-			this.currentPlayer.setRecentNonPocket(false);
 		}
+	}
+
+	public boolean isPlayable() {
+		return carromBoard.isPlayable();
 	}
 }

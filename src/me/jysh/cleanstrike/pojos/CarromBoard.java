@@ -3,7 +3,7 @@ package me.jysh.cleanstrike.pojos;
 public class CarromBoard {
 	private int blackCoinCount;
 	private int redCoinCount;
-	
+
 	{
 		blackCoinCount = 9;
 		redCoinCount = 1;
@@ -24,32 +24,37 @@ public class CarromBoard {
 	public void setRedCoinCount(int redCoinCount) {
 		this.redCoinCount = redCoinCount;
 	}
-	
-	public void incrementBlackCoinCount (int blackCoinCount) {
+
+	public void incrementBlackCoinCount(int blackCoinCount) {
 		this.blackCoinCount += blackCoinCount;
 	}
-	
+
 	public void decrementBlackCoinCount(int blackCoinCount) {
 		this.blackCoinCount -= blackCoinCount;
 	}
-	
-	public void  incrementRedCoinCount(int redCoinCount) {
+
+	public void incrementRedCoinCount(int redCoinCount) {
 		this.redCoinCount += redCoinCount;
 	}
-	
+
 	public void decrementRedCoinCount(int redCoinCount) {
 		this.redCoinCount -= redCoinCount;
 	}
-	
+
 	public boolean hasBlackCoins() {
 		return this.blackCoinCount > 0;
 	}
-	
+
 	public boolean hasRedCoins() {
 		return this.redCoinCount > 0;
 	}
 
 	public boolean isPlayable() {
 		return blackCoinCount > 0 || redCoinCount > 0;
+	}
+
+	@Override
+	public String toString() {
+		return "CarromBoard [BlackCoins= " + blackCoinCount + ", RedCoins= " + redCoinCount + "]";
 	}
 }

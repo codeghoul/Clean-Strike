@@ -3,25 +3,26 @@ package me.jysh.cleanstrike.pojos.strikes;
 import java.util.HashMap;
 import java.util.Map;
 
-public enum EnumStrike {
-	NORMALSTRIKE("1", "Perform Black EnumStrike"),
-	MULTISTRIKE("2", "Perform Multi EnumStrike"),
-	REDSTRIKE("3", "Perform Red EnumStrike"),
-	STRIKERSTRIKE("4", "Perform Stricker EnumStrike"),
-	DEFUNCTCOINSTRIKE("5", "Perform Defunct Coin EnumStrike"),
-	NOSTRIKE("6", "Pocket Nothing");
+public enum StrikeInformation {
+	NORMALSTRIKE("1", "pocket Black Coin."),
+	MULTISTRIKE("2", "pocket Multiple Black Coins."),
+	REDSTRIKE("3", "pocket Red Coin."),
+	STRIKERSTRIKE("4", "pocket Striker."),
+	DEFUNCTBLACKCOINSTRIKE("5", "defunct Black Coin."),
+	DEFUNCTREDCOINSTRIKE("6", "defunct Red Coin."),
+	NOSTRIKE("7", "pocket nothing.");
 	
 	String strikeChoice;
 	String strikeDescription;
-	private static final Map<String, EnumStrike> STRIKELOOKUP = new HashMap<>();
+	private static final Map<String, StrikeInformation> STRIKELOOKUP = new HashMap<>();
 	
-	EnumStrike(String strikeChoice, String strikeDescription) {
+	StrikeInformation(String strikeChoice, String strikeDescription) {
 		this.strikeChoice = strikeChoice;
 		this.strikeDescription = strikeDescription;
 	}
 	
 	static {
-		for(EnumStrike strike : EnumStrike.values()) {
+		for(StrikeInformation strike : StrikeInformation.values()) {
 			STRIKELOOKUP.put(strike.getStrikeChoice(), strike);
 		}
 	}
@@ -34,7 +35,7 @@ public enum EnumStrike {
 		return strikeDescription;
 	}
 
-	public static EnumStrike getStrikelookup(String strikeChoice) {
+	public static StrikeInformation getStrikelookup(String strikeChoice) {
 		return STRIKELOOKUP.get(strikeChoice);
 	}
 

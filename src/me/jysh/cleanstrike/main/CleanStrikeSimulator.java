@@ -30,39 +30,43 @@ public class CleanStrikeSimulator {
 			LOGGER.info("Player " + winner.getPlayerName() + " won the game by: "
 					+ Math.abs(playerOne.getPointCount() - playerTwo.getPointCount()) + " Points");
 		} else {
-			LOGGER.info("It's a draw.");
+			LOGGER.info("Hey, it's a Draw. Everybody is a Winner!");
 		}
 	}
 
 	private void playCleanStrike() {
+		displayGameStatus();
 		while (isPlayable()) {
-			displayPlayerName();
+			displayCurrentPlayerName();
 			iStrike currentStrike = IOUtils.inputStrikeInformation(cleanStrike.getCarromBoard());
 			cleanStrike.setCurrentStrike(currentStrike);
 			cleanStrike.performStrike();
 			cleanStrike.performFoulOperations();
-			displayGameStatus();
 			switchCurrentPlayer();
+			displayGameStatus();
 		}
 	}
 
-	private void displayPlayerName() {
-		System.out.print(cleanStrike.getCurrentPlayer().getPlayerName() + " ");
+	private void displayCurrentPlayerName() {
+		LOGGER.info("Current Player: " + cleanStrike.getCurrentPlayer().getPlayerName());
 	}
 
 	private void switchCurrentPlayer() {
-		LOGGER.trace("Player Before Switching: " + cleanStrike.getCurrentPlayer().getPlayerName());
+		LOGGER.trace("Player Before Switching: " + cleanStrike.getCurrentPlayer());
+
 		cleanStrike.setCurrentPlayer(cleanStrike.getCurrentPlayer() == playerOne ? playerTwo : playerOne);
-		LOGGER.trace("Player After Switching: " + cleanStrike.getCurrentPlayer().getPlayerName());
+
+		LOGGER.trace("Player After Switching: " + cleanStrike.getCurrentPlayer());
 	}
 
 	private void displayGameStatus() {
-		LOGGER.info(playerOne.getPlayerName() + " Points: " + playerOne.getPointCount() + "\n"
-				+ playerTwo.getPlayerName() + "Points: " + playerTwo.getPointCount());
+		LOGGER.info(cleanStrike.getCarromBoard());
+		LOGGER.info(playerOne);
+		LOGGER.info(playerTwo);
 	}
 
 	private boolean isPlayable() {
-		return !hasWinner() && this.cleanStrike.getCarromBoard().isPlayable();
+		return !hasWinner() && cleanStrike.isPlayable();
 	}
 
 	private boolean hasWinner() {
@@ -79,16 +83,12 @@ public class CleanStrikeSimulator {
 	}
 
 	private void initCurrentPlayer() {
-		LOGGER.trace("Entering initCurrentPlayer()");
 		Player currentPlayer = IOUtils.inputCurrentPlayer(playerOne, playerTwo);
 		this.cleanStrike = new CleanStrikeGame();
 		cleanStrike.setCurrentPlayer(currentPlayer);
-		LOGGER.info(this.cleanStrike.getCurrentPlayer().getPlayerName() + " goes first!");
-		LOGGER.trace("Exiting initCurrentPlayer()");
 	}
 
 	private void initPlayers() {
-		LOGGER.trace("Entering initPlayers()");
 		String playerName = null;
 
 		System.out.println("Enter Player One Name: ");
@@ -98,7 +98,5 @@ public class CleanStrikeSimulator {
 		System.out.println("Enter Player Two Name: ");
 		playerName = IOUtils.inputPlayerName();
 		this.playerTwo = new Player(playerName);
-
-		LOGGER.trace("Exiting initPlayers()");
 	}
 }

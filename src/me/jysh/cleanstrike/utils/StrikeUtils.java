@@ -1,35 +1,36 @@
 package me.jysh.cleanstrike.utils;
 
-import me.jysh.cleanstrike.pojos.strikes.MultiStrike;
-import me.jysh.cleanstrike.pojos.strikes.NoStrike;
-import me.jysh.cleanstrike.pojos.strikes.NormalStrike;
-import me.jysh.cleanstrike.pojos.strikes.RedStrike;
-import me.jysh.cleanstrike.pojos.strikes.DefunctCoinStrike;
-import me.jysh.cleanstrike.pojos.strikes.EnumStrike;
-import me.jysh.cleanstrike.pojos.strikes.StrikerStrike;
-import me.jysh.cleanstrike.pojos.strikes.iStrike;
-
-import java.util.function.Supplier;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Supplier;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import me.jysh.cleanstrike.pojos.strikes.*;
 
 public class StrikeUtils {
-	private static final Map<EnumStrike, Supplier<iStrike>> STRIKESUPPLIER;
+	private static final Map<StrikeInformation, Supplier<iStrike>> STRIKESUPPLIER;
+	private static final Logger LOGGER = LogManager.getLogger(StrikeUtils.class.getClass());
 
 	static {
-		final Map<EnumStrike, Supplier<iStrike>> strikes = new HashMap<>();
-		strikes.put(EnumStrike.NORMALSTRIKE, NormalStrike::new);
-		strikes.put(EnumStrike.MULTISTRIKE, MultiStrike::new);
-		strikes.put(EnumStrike.REDSTRIKE, RedStrike::new);
-		strikes.put(EnumStrike.STRIKERSTRIKE, StrikerStrike::new);
-		strikes.put(EnumStrike.DEFUNCTCOINSTRIKE, DefunctCoinStrike::new);
-		strikes.put(EnumStrike.NOSTRIKE, NoStrike::new);
+		final Map<StrikeInformation, Supplier<iStrike>> strikeSupplier = new HashMap<>();
+		strikeSupplier.put(StrikeInformation.NORMALSTRIKE, NormalStrike::new);
+		strikeSupplier.put(StrikeInformation.MULTISTRIKE, MultiStrike::new);
+		strikeSupplier.put(StrikeInformation.REDSTRIKE, RedStrike::new);
+		strikeSupplier.put(StrikeInformation.STRIKERSTRIKE, StrikerStrike::new);
+		strikeSupplier.put(StrikeInformation.DEFUNCTBLACKCOINSTRIKE, DefunctBlackCoinStrike::new);
+		strikeSupplier.put(StrikeInformation.DEFUNCTREDCOINSTRIKE, DefunctRedCoinStrike::new);
+		strikeSupplier.put(StrikeInformation.NOSTRIKE, NoStrike::new);
+
+		STRIKESUPPLIER = Collections.unmodifiableMap(strikeSupplier);
 		
-		STRIKESUPPLIER = Collections.unmodifiableMap(strikes);	
+		LOGGER.debug("Strike Supplier Initialized");
 	}
-	
-	public static Map<EnumStrike, Supplier<iStrike>> getStrikesupplier() {
+
+	public static Map<StrikeInformation, Supplier<iStrike>> getStrikeSupplier() {
+		LOGGER.debug("Strike Supplier Sent");
 		return STRIKESUPPLIER;
 	}
 }
