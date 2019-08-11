@@ -1,13 +1,13 @@
 package me.jysh.cleanstrike.utils;
 
 import me.jysh.cleanstrike.pojos.DefunctCoinStrike;
-import me.jysh.cleanstrike.pojos.MultiStrike;
-import me.jysh.cleanstrike.pojos.NoStrike;
-import me.jysh.cleanstrike.pojos.NormalStrike;
-import me.jysh.cleanstrike.pojos.RedStrike;
-import me.jysh.cleanstrike.pojos.Strike;
-import me.jysh.cleanstrike.pojos.StrikerStrike;
-import me.jysh.cleanstrike.pojos.iStrike;
+import me.jysh.cleanstrike.pojos.strikes.MultiStrike;
+import me.jysh.cleanstrike.pojos.strikes.NoStrike;
+import me.jysh.cleanstrike.pojos.strikes.NormalStrike;
+import me.jysh.cleanstrike.pojos.strikes.RedStrike;
+import me.jysh.cleanstrike.pojos.strikes.EnumStrike;
+import me.jysh.cleanstrike.pojos.strikes.StrikerStrike;
+import me.jysh.cleanstrike.pojos.strikes.iStrike;
 
 import java.util.function.Supplier;
 import java.util.Collections;
@@ -15,27 +15,21 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class StrikeUtils {
-	private static final Map<Strike, Supplier<iStrike>> STRIKESUPPLIER;
-	
+	private static final Map<EnumStrike, Supplier<iStrike>> STRIKESUPPLIER;
+
 	static {
-		final Map<Strike, Supplier<iStrike>> strikes = new HashMap<>();
-		strikes.put(Strike.NORMALSTRIKE, NormalStrike::new);
-		strikes.put(Strike.MULTISTRIKE, MultiStrike::new);
-		strikes.put(Strike.REDSTRIKE, RedStrike::new);
-		strikes.put(Strike.STRIKERSTRIKE, StrikerStrike::new);
-		strikes.put(Strike.DEFUNCTCOINSTRIKE, DefunctCoinStrike::new);
-		strikes.put(Strike.NOSTRIKE, NoStrike::new);
+		final Map<EnumStrike, Supplier<iStrike>> strikes = new HashMap<>();
+		strikes.put(EnumStrike.NORMALSTRIKE, NormalStrike::new);
+		strikes.put(EnumStrike.MULTISTRIKE, MultiStrike::new);
+		strikes.put(EnumStrike.REDSTRIKE, RedStrike::new);
+		strikes.put(EnumStrike.STRIKERSTRIKE, StrikerStrike::new);
+		strikes.put(EnumStrike.DEFUNCTCOINSTRIKE, DefunctCoinStrike::new);
+		strikes.put(EnumStrike.NOSTRIKE, NoStrike::new);
 		
 		STRIKESUPPLIER = Collections.unmodifiableMap(strikes);	
 	}
 	
-	public iStrike strikeSorter(Strike strike) {
-		Supplier<iStrike> strikeType = STRIKESUPPLIER.get(strike);
-		
-		if(strikeType == null) {
-			throw new IllegalArgumentException("Invalid Sorter Type: " + strike.getStrikeDescription());
-		}
-		
-		return strikeType.get();
+	public static Map<EnumStrike, Supplier<iStrike>> getStrikesupplier() {
+		return STRIKESUPPLIER;
 	}
 }

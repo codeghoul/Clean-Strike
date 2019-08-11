@@ -1,5 +1,7 @@
 package me.jysh.cleanstrike.pojos;
 
+import me.jysh.cleanstrike.pojos.strikes.iStrike;
+
 public class CleanStrikeGame {
 	private Player currentPlayer;
 	private iStrike currentStrike;

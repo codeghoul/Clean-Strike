@@ -52,9 +52,4 @@ public class CarromBoard {
 	public boolean isPlayable() {
 		return blackCoinCount > 0 || redCoinCount > 0;
 	}
-
-	public void defunctCoin() {
-		inputDefunctedCoin();
-	}
-	
 }

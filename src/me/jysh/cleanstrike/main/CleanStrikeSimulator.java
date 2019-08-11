@@ -1,16 +1,11 @@
 package me.jysh.cleanstrike.main;
 
-import org.apache.logging.log4j.Logger;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-
 import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import me.jysh.cleanstrike.pojos.CleanStrikeGame;
 import me.jysh.cleanstrike.pojos.Player;
-import me.jysh.cleanstrike.pojos.iStrike;
+import me.jysh.cleanstrike.pojos.strikes.iStrike;
 import me.jysh.cleanstrike.utils.IOUtils;
 
 public class CleanStrikeSimulator {
@@ -30,7 +25,7 @@ public class CleanStrikeSimulator {
 
 	private void playCleanStrike() {
 		while (isPlayable()) {
-			iStrike currentStrike = IOUtils.inputStrikeInformation();
+			iStrike currentStrike = IOUtils.inputStrikeInformation(cleanStrike.getCarromBoard());
 			cleanStrike.setCurrentStrike(currentStrike);
 			cleanStrike.performStrike();
 		}
