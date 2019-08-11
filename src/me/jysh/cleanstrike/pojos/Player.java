@@ -1,4 +1,4 @@
-package me.jysh.cleanstrike.beans;
+package me.jysh.cleanstrike.pojos;
 
 public class Player {
 	private String playerName;
@@ -36,5 +36,29 @@ public class Player {
 
 	public void setSuccessiveNonPocketCount(int successiveNonPocketCount) {
 		this.successiveNonPocketCount = successiveNonPocketCount;
+	}
+
+	public void incrementPointCount(int pointCount) {
+		this.pointCount += pointCount;
+	}
+
+	public void decrementPointCount(int pointCount) {
+		this.pointCount -= pointCount;
+	}
+
+	public void incrementFoulCount(int foulCount) {
+		this.foulCount += foulCount;
+	}
+
+	public void decrementFoulCount(int foulCount) {
+		this.foulCount -= foulCount;
+	}
+
+	public void incrementSuccessiveNonPocketCount(int successiveNonPocketCount) {
+		this.successiveNonPocketCount += successiveNonPocketCount;
+	}
+
+	public void decrementSuccessiveNonPocketCount(int successiveNonPocketCount) {
+		this.successiveNonPocketCount += successiveNonPocketCount;
 	}
 }
