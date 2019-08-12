@@ -35,9 +35,7 @@ public class CleanStrikeSimulator {
 	}
 
 	private void playCleanStrike() {
-		displayGameStatus();
 		while (isPlayable()) {
-			displayCurrentPlayerName();
 			iStrike currentStrike = IOUtils.inputStrikeInformation(cleanStrike.getCarromBoard());
 			cleanStrike.setCurrentStrike(currentStrike);
 			cleanStrike.performStrike();
@@ -45,10 +43,6 @@ public class CleanStrikeSimulator {
 			switchCurrentPlayer();
 			displayGameStatus();
 		}
-	}
-
-	private void displayCurrentPlayerName() {
-		LOGGER.info("Current Player: " + cleanStrike.getCurrentPlayer().getPlayerName());
 	}
 
 	private void switchCurrentPlayer() {
@@ -60,9 +54,12 @@ public class CleanStrikeSimulator {
 	}
 
 	private void displayGameStatus() {
+		System.out.println();
+		LOGGER.info("Game Status: ");
 		LOGGER.info(cleanStrike.getCarromBoard());
 		LOGGER.info(playerOne);
 		LOGGER.info(playerTwo);
+		LOGGER.info("Current Player: " + cleanStrike.getCurrentPlayer().getPlayerName());
 	}
 
 	private boolean isPlayable() {
