@@ -5,6 +5,16 @@ import me.jysh.cleanstrike.pojos.CarromBoard;
 import me.jysh.cleanstrike.pojos.Player;
 
 public class NormalStrike implements iStrike {
+	private static final NormalStrike NORMAL_STRIKE = new NormalStrike();
+	
+	private NormalStrike() {
+		
+	}
+	
+	public static NormalStrike getInstance() {
+		return NORMAL_STRIKE;
+	}
+	
 	@Override
 	public boolean isStrikePossible(CarromBoard carromBoard) {
 		return carromBoard.hasBlackCoins();

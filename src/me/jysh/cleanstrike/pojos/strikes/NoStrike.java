@@ -5,6 +5,15 @@ import me.jysh.cleanstrike.pojos.CarromBoard;
 import me.jysh.cleanstrike.pojos.Player;
 
 public class NoStrike implements iStrike {
+	private static final NoStrike NO_STRIKE = new NoStrike();
+
+	private NoStrike() {
+		
+	}
+
+	public static NoStrike getInstance() {
+		return NO_STRIKE;
+	}
 
 	@Override
 	public boolean isStrikePossible(CarromBoard carromBoard) {

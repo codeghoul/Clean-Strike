@@ -5,6 +5,15 @@ import me.jysh.cleanstrike.pojos.CarromBoard;
 import me.jysh.cleanstrike.pojos.Player;
 
 public class StrikerStrike implements iStrike {
+	private static final StrikerStrike STRIKER_STRIKE = new StrikerStrike();
+
+	private StrikerStrike() {
+		
+	}
+
+	public static StrikerStrike getInstance() {
+		return STRIKER_STRIKE;
+	}
 
 	@Override
 	public boolean isStrikePossible(CarromBoard carromBoard) {

@@ -16,13 +16,13 @@ public class StrikeUtils {
 
 	static {
 		final Map<StrikeInformation, Supplier<iStrike>> strikeSupplier = new HashMap<>();
-		strikeSupplier.put(StrikeInformation.NORMALSTRIKE, NormalStrike::new);
-		strikeSupplier.put(StrikeInformation.MULTISTRIKE, MultiStrike::new);
-		strikeSupplier.put(StrikeInformation.REDSTRIKE, RedStrike::new);
-		strikeSupplier.put(StrikeInformation.STRIKERSTRIKE, StrikerStrike::new);
-		strikeSupplier.put(StrikeInformation.DEFUNCTBLACKCOINSTRIKE, DefunctBlackCoinStrike::new);
-		strikeSupplier.put(StrikeInformation.DEFUNCTREDCOINSTRIKE, DefunctRedCoinStrike::new);
-		strikeSupplier.put(StrikeInformation.NOSTRIKE, NoStrike::new);
+		strikeSupplier.put(StrikeInformation.NORMAL_STRIKE, NormalStrike::getInstance);
+		strikeSupplier.put(StrikeInformation.MULTI_STRIKE, MultiStrike::getInstance);
+		strikeSupplier.put(StrikeInformation.RED_STRIKE, RedStrike::getInstance);
+		strikeSupplier.put(StrikeInformation.STRIKER_STRIKE, StrikerStrike::getInstance);
+		strikeSupplier.put(StrikeInformation.DEFUNCT_BLACK_COIN_STRIKE, DefunctBlackCoinStrike::getInstance);
+		strikeSupplier.put(StrikeInformation.DEFUNCT_RED_COIN_STRIKE, DefunctRedCoinStrike::getInstance);
+		strikeSupplier.put(StrikeInformation.NO_STRIKE, NoStrike::getInstance);
 
 		STRIKESUPPLIER = Collections.unmodifiableMap(strikeSupplier);
 		

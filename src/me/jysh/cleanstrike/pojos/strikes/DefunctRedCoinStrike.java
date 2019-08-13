@@ -5,6 +5,15 @@ import me.jysh.cleanstrike.pojos.CarromBoard;
 import me.jysh.cleanstrike.pojos.Player;
 
 public class DefunctRedCoinStrike implements iStrike {
+	private static final DefunctRedCoinStrike DEFUNCT_RED_COIN_STRIKE = new DefunctRedCoinStrike();
+
+	private DefunctRedCoinStrike() {
+		
+	}
+
+	public static DefunctRedCoinStrike getInstance() {
+		return DEFUNCT_RED_COIN_STRIKE;
+	}
 
 	@Override
 	public boolean isStrikePossible(CarromBoard carromBoard) {

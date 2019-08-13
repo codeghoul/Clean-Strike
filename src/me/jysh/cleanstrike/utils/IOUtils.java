@@ -80,7 +80,7 @@ public class IOUtils {
 			strike = strikeSupplier.get(strikeInformation).get();
 			LOGGER.info("Current Strike Purpose: " + strikeInformation.getStrikeDescription());
 		} catch (IOException | IllegalArgumentException e) {
-			LOGGER.error("A problem occured when choosing who goes first. Details: " + e.getMessage());
+			LOGGER.error("A problem when choosing who strike. Details: " + e.getMessage());
 			strike = inputStrikeInformation(carromBoard);
 		}
 
